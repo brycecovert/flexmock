@@ -917,6 +917,17 @@ class RegularClass(object):
     self._tear_down()
     assertEqual('User', User.get_stuff())
 
+  def test_flexmock_should_properrly_restore_class_attributes_on_mocked_modules(self):
+    if 'flexmock_test' in sys.modules:
+      mod = sys.modules['flexmock_test']
+    else:
+      mod = sys.modules['__main__']
+    flexmock(mod).NewStyleClass = flexmock(test_attr = 'something else')
+    assertEqual('something else', mod.NewStyleClass.test_attr)
+    self._tear_down()
+    assertEqual('original value', mod.NewStyleClass.test_attr)
+
+
   def test_spy_should_match_return_value_class(self):
     class User: pass
     user = User()
