@@ -35,7 +35,7 @@ class OldStyleClass:
 
 
 class NewStyleClass(object):
-  pass
+  test_attr = 'original value'
 
 
 def assertRaises(exception, method, *kargs, **kwargs):
